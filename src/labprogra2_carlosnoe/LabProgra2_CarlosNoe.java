@@ -17,6 +17,12 @@ public class LabProgra2_CarlosNoe {
     /**
      * @param args the command line arguments
      */
+    public static int AnioNac;
+    public static int MesNac;
+    public static int DiaNac;
+    public static String Contrasenya;
+    public static String Correo;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Scanner ints = new Scanner(System.in);
@@ -55,12 +61,15 @@ public class LabProgra2_CarlosNoe {
                                     j--;
                                 }
                             }
+                            Date c = new Date(AnioNac - 1900, MesNac - 1, DiaNac);
+
                             for (int j = 0; j < 1; j++) {
 
                                 System.out.println("Ingrese su Correo");
+
                                 String Correo = sc.nextLine();
                                 Valid = CorreosInvalidos(Correo);
-                                Valid=VerificadorCorreos( Correo,  UsU);
+                                Valid = VerificadorCorreos(Correo, UsU);
                                 if (Valid = true) {
                                     j++;
                                 } else {
@@ -68,9 +77,18 @@ public class LabProgra2_CarlosNoe {
                                     System.out.println("Correo Invalido");
                                 }
                             }
-                            System.out.println("Ingrese su Contrasenya");
-                            String Contrasenya = sc.nextLine();
-
+                            for (int j = 0; j < 1; j++) {
+                                System.out.println("Ingrese su Contrasenya");
+                                String Contrasenya = sc.nextLine();
+                                Valid = VeriContra(Contrasenya);
+                                if (Valid = true) {
+                                    j++;
+                                } else {
+                                    j--;
+                                    System.out.println("Contrasenya Invalida");
+                                }
+                            }
+                            Usuarios NewU = new Usuarios(Nombre, Apellido, c, Correo, Contrasenya);
                         }
 
                         break;
@@ -90,6 +108,36 @@ public class LabProgra2_CarlosNoe {
             }
         }
 
+    }
+
+    public static boolean VeriContra(String Contra) {
+        boolean Valid = true;
+        int NumMayus = 0;
+        int NumMenus = 0;
+        int NumNum = 0;
+        int Caracteres = 0;
+        for (int i = 0; i < Contra.length() - 1; i++) {
+            char C = Contra.charAt(i);
+            int o = C;
+            if ((o == 33) && (o == 36) && (o == 37) && (o == 60) && (o == 62) && (o == 63)) {
+                Caracteres = Caracteres + 1;
+            } else if ((o >= 65) && (o <= 90)) {
+                NumMayus = NumMayus + 1;
+            } else if ((o >= 97) && (o <= 122)) {
+                NumMenus = NumMenus + 1;
+            } else if ((o >= 48) && (o <= 57)) {
+                NumNum = NumNum + 1;
+            } else {
+                return Valid = false;
+            }
+        }
+        if ((NumMayus > 0) && (Caracteres > 0) && (NumMenus > 0) && (NumNum > 0)) {
+            Valid = true;
+        } else {
+            Valid = false;
+        }
+//33, 60, 62, 36, 37, 63
+        return Valid;
     }
 
     public static boolean CorreosInvalidos(String Correo) {
