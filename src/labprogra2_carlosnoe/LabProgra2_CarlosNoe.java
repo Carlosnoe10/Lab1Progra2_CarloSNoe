@@ -26,6 +26,8 @@ public class LabProgra2_CarlosNoe {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Scanner ints = new Scanner(System.in);
+        Scanner sc1 = new Scanner(System.in);
+
         ArrayList<Usuarios> UsU = new ArrayList();
         boolean Bandera = true;
         while (Bandera != false) {
@@ -42,20 +44,26 @@ public class LabProgra2_CarlosNoe {
                         for (int i = 0; i < 1; i++) {
                             System.out.println("Registrar Usuarios ");
                             System.out.println("Ingrese su nombre");
-                            String Nombre = sc.nextLine();
+                            String Nombre = sc1.nextLine();
                             System.out.println("Ingrese su apellido");
-                            String Apellido = sc.nextLine();
 
+                            sc1 = new Scanner(System.in);
+                            String Apellido = sc1.nextLine();
+
+                            sc = new Scanner(System.in);
+                            ints = new Scanner(System.in);
+                            sc1 = new Scanner(System.in);
                             for (int j = 0; j < 1; j++) {
+                                System.out.println("Ingrese el Ano de nac");
+                                AnioNac = ints.nextInt();
+                                System.out.println("Ingrese el mes");
+                                MesNac = ints.nextInt();
+                                System.out.println("Ingrese el dia");
+                                DiaNac = ints.nextInt();
 
-                                int AnioNac = ints.nextInt();
-                                int MesNac = ints.nextInt();
-                                int DiaNac = ints.nextInt();
-
-                                if ((AnioNac < 2013) || (AnioNac < 0) || (MesNac < 13) || (AnioNac < 0) || (DiaNac < 32) || (DiaNac < 0)) {
+                                if ((AnioNac < 2013) && (AnioNac > 0) && (MesNac < 13) && (MesNac > 0) && (DiaNac < 32) && (DiaNac > 0)) {
                                     j++;
                                     Date Fecha = new Date(AnioNac, MesNac, DiaNac);
-                                    System.out.println("1");
                                 } else {
                                     System.out.println("Fecha Invalida");
                                     j--;
@@ -63,23 +71,34 @@ public class LabProgra2_CarlosNoe {
                             }
                             Date c = new Date(AnioNac - 1900, MesNac - 1, DiaNac);
 
+                            boolean pam=true;
                             for (int j = 0; j < 1; j++) {
 
                                 System.out.println("Ingrese su Correo");
 
-                                String Correo = sc.nextLine();
-                                Valid = CorreosInvalidos(Correo);
-                                Valid = VerificadorCorreos(Correo, UsU);
-                                if (Valid = true) {
-                                    j++;
-                                } else {
+                                Correo = sc.nextLine();
+//                                Valid = CorreosInvalidos(Correo);
+//                                Valid = VerificadorCorreos(Correo, UsU);
+                                for (int a = 0; a < Correo.length() - 1; a++) {
+                                    char C = Correo.charAt(i);
+                                    int o = C;
+                                    if ((o == 36) && (o == 37) && (o == 38) && (o == 45) && (o >= 64) || (o <= 90) && (o >= 97) || (o <= 122)) {
+                                        
+                                    } else {
+                                        pam = false;
+                                        System.out.println("Contra Invalida");
+                                    }
+
+                                }
+                                if (pam=false) {
                                     j--;
-                                    System.out.println("Correo Invalido");
+                                }else{
+                                    j++;
                                 }
                             }
                             for (int j = 0; j < 1; j++) {
                                 System.out.println("Ingrese su Contrasenya");
-                                String Contrasenya = sc.nextLine();
+                                Contrasenya = sc.nextLine();
                                 Valid = VeriContra(Contrasenya);
                                 if (Valid = true) {
                                     j++;
@@ -89,6 +108,7 @@ public class LabProgra2_CarlosNoe {
                                 }
                             }
                             Usuarios NewU = new Usuarios(Nombre, Apellido, c, Correo, Contrasenya);
+                            UsU.add(NewU);
                         }
 
                         break;
