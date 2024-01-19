@@ -7,6 +7,8 @@ package labprogra2_carlosnoe;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -72,9 +74,12 @@ public class LabProgra2_CarlosNoe {
                             Date c = new Date(AnioNac - 1900, MesNac - 1, DiaNac);
                             boolean zero = true;
                             boolean pam = true;
+                            
+                            
                             for (int j = 0; j < 1; j++) {
                                 System.out.println("Ingrese su Correo");
                                 Correo = sc.nextLine();
+                                boolean l= Correo( Correo);
 //                                Valid = CorreosInvalidos(Correo);
 //                                Valid = VerificadorCorreos(Correo, UsU);
                                 for (int a = 0; a < Correo.length() - 1; a++) {
@@ -110,31 +115,11 @@ public class LabProgra2_CarlosNoe {
                             for (int j = 0; j < 1; j++) {
                                 System.out.println("Ingrese su Contrasenya");
                                 Contrasenya = sc.nextLine();
-                                Valid = VeriContra(Contrasenya);
-                                int NumMayus = 0;
-                                int NumMenus = 0;
-                                int NumNum = 0;
-                                int Caracteres = 0;
-                                for (int r = 0; r < Contrasenya.length() - 1; r++) {
-                                    char C = Contrasenya.charAt(i);
-                                    int o = C;
-                                    if ((o == 33) && (o == 36) && (o == 37) && (o == 60) && (o == 62) && (o == 63)) {
-                                        Caracteres = Caracteres + 1;
-                                    } else if ((o >= 65) && (o <= 90)) {
-                                        NumMayus = NumMayus + 1;
-                                    } else if ((o >= 97) && (o <= 122)) {
-                                        NumMenus = NumMenus + 1;
-                                    } else if ((o >= 48) && (o <= 57)) {
-                                        NumNum = NumNum + 1;
-                                    } else {
-
-                                    }
+                                if (Contrasenya.length()<8) {
+                                    Remid= false;
                                 }
-                                if ((NumMayus > 0) && (Caracteres > 0) && (NumMenus > 0) && (NumNum > 0)) {
-                                    Remid = true;
-                                } else {
-                                    Remid = false;
-                                }
+                                Remid=Contra(Contrasenya);
+                                
                                 if (Remid = true) {
                                     j++;
                                 } else {
@@ -166,65 +151,21 @@ public class LabProgra2_CarlosNoe {
         }
 
     }
-
-    public static boolean VeriContra(String Contra) {
-        boolean Valid = true;
-        int NumMayus = 0;
-        int NumMenus = 0;
-        int NumNum = 0;
-        int Caracteres = 0;
-        for (int i = 0; i < Contra.length() - 1; i++) {
-            char C = Contra.charAt(i);
-            int o = C;
-            if ((o == 33) && (o == 36) && (o == 37) && (o == 60) && (o == 62) && (o == 63)) {
-                Caracteres = Caracteres + 1;
-            } else if ((o >= 65) && (o <= 90)) {
-                NumMayus = NumMayus + 1;
-            } else if ((o >= 97) && (o <= 122)) {
-                NumMenus = NumMenus + 1;
-            } else if ((o >= 48) && (o <= 57)) {
-                NumNum = NumNum + 1;
-            } else {
-                return Valid = false;
-            }
-        }
-        if ((NumMayus > 0) && (Caracteres > 0) && (NumMenus > 0) && (NumNum > 0)) {
-            Valid = true;
-        } else {
-            Valid = false;
-        }
-//33, 60, 62, 36, 37, 63
-        return Valid;
+    
+    public static boolean Correo(String Correo){
+        String regex= "^[a-zA-Z0-9._%&$+-]+ @[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        Pattern pattern= Pattern.compile(regex);
+        System.out.println(regex);
+        Matcher matcher= pattern.matcher(Correo);
+        System.out.println(matcher);
+        return matcher.matches();
+        
     }
-
-    public static boolean CorreosInvalidos(String Correo) {
-        boolean Valid = true;
-        for (int i = 0; i < Correo.length() - 1; i++) {
-            char C = Correo.charAt(i);
-            int o = C;
-            if ((o == 36) && (o == 37) && (o == 38) && (o == 45) && (o >= 64) && (o <= 90) && (o >= 97) && (o <= 122)) {
-                Valid = true;
-
-            } else {
-                Valid = false;
-            }
-        }
-        //45, 95, 38, 36, 37, 65->90 97->122
-        return Valid;
-    }
-
-    public static boolean VerificadorCorreos(String correo, ArrayList<Usuarios> Lista) {
-        boolean Valid = true;
-        for (int i = 0; i < Lista.size(); i++) {
-            if (correo.equalsIgnoreCase(Lista.get(i).getCorreoE())) {
-                Valid = true;
-            } else {
-                Valid = false;
-            }
-        }
-
-        return Valid; // Si sale y esta mal aqui
-
+    public static boolean Contra(String contra){
+        String regex = "^[a-zA-Z0-9._%&$+-?<>!]{8,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(contra);
+        return matcher.matches();
     }
 
 }
