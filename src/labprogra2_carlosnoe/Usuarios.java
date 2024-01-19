@@ -19,6 +19,46 @@ public class Usuarios {
         this.CorreoE = CorreoE;
         this.Contrasenya = Contrasenya;
     }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
+    public String getApellido() {
+        return Apellido;
+    }
+
+    public void setApellido(String Apellido) {
+        this.Apellido = Apellido;
+    }
+
+    public Date getFecha() {
+        return Fecha;
+    }
+
+    public void setFecha(Date Fecha) {
+        this.Fecha = Fecha;
+    }
+
+    public String getCorreoE() {
+        return CorreoE;
+    }
+
+    public void setCorreoE(String CorreoE) {
+        this.CorreoE = CorreoE;
+    }
+
+    public String getContrasenya() {
+        return Contrasenya;
+    }
+
+    public void setContrasenya(String Contrasenya) {
+        this.Contrasenya = Contrasenya;
+    }
     
     
 }
