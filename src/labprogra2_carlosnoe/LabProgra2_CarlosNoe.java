@@ -70,12 +70,10 @@ public class LabProgra2_CarlosNoe {
                                 }
                             }
                             Date c = new Date(AnioNac - 1900, MesNac - 1, DiaNac);
-
-                            boolean pam=true;
+                            boolean zero = true;
+                            boolean pam = true;
                             for (int j = 0; j < 1; j++) {
-
                                 System.out.println("Ingrese su Correo");
-
                                 Correo = sc.nextLine();
 //                                Valid = CorreosInvalidos(Correo);
 //                                Valid = VerificadorCorreos(Correo, UsU);
@@ -83,24 +81,61 @@ public class LabProgra2_CarlosNoe {
                                     char C = Correo.charAt(i);
                                     int o = C;
                                     if ((o == 36) && (o == 37) && (o == 38) && (o == 45) && (o >= 64) || (o <= 90) && (o >= 97) || (o <= 122)) {
-                                        
                                     } else {
                                         pam = false;
                                         System.out.println("Contra Invalida");
                                     }
-
                                 }
-                                if (pam=false) {
+                                for (int k = 0; k < UsU.size(); k++) {
+                                    if (Correo.equalsIgnoreCase(UsU.get(i).getCorreoE())) {
+                                        zero = true;
+                                    } else {
+                                        zero = false;
+                                    }
+                                }
+
+                                if (pam = false) {
                                     j--;
-                                }else{
+                                } else {
                                     j++;
                                 }
+                                if (zero = false) {
+                                    j--;
+                                } else {
+                                    j++;
+                                }
+
                             }
+                            boolean Remid = true;
                             for (int j = 0; j < 1; j++) {
                                 System.out.println("Ingrese su Contrasenya");
                                 Contrasenya = sc.nextLine();
                                 Valid = VeriContra(Contrasenya);
-                                if (Valid = true) {
+                                int NumMayus = 0;
+                                int NumMenus = 0;
+                                int NumNum = 0;
+                                int Caracteres = 0;
+                                for (int r = 0; r < Contrasenya.length() - 1; r++) {
+                                    char C = Contrasenya.charAt(i);
+                                    int o = C;
+                                    if ((o == 33) && (o == 36) && (o == 37) && (o == 60) && (o == 62) && (o == 63)) {
+                                        Caracteres = Caracteres + 1;
+                                    } else if ((o >= 65) && (o <= 90)) {
+                                        NumMayus = NumMayus + 1;
+                                    } else if ((o >= 97) && (o <= 122)) {
+                                        NumMenus = NumMenus + 1;
+                                    } else if ((o >= 48) && (o <= 57)) {
+                                        NumNum = NumNum + 1;
+                                    } else {
+
+                                    }
+                                }
+                                if ((NumMayus > 0) && (Caracteres > 0) && (NumMenus > 0) && (NumNum > 0)) {
+                                    Remid = true;
+                                } else {
+                                    Remid = false;
+                                }
+                                if (Remid = true) {
                                     j++;
                                 } else {
                                     j--;
@@ -113,7 +148,9 @@ public class LabProgra2_CarlosNoe {
 
                         break;
                     case 2:
-
+                        for (int i = 0; i < UsU.size(); i++) {
+                            System.out.println(UsU.get(i).toString());
+                        }
                         break;
                     case 3:
 

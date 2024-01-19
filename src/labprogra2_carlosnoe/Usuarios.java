@@ -1,8 +1,10 @@
 package labprogra2_carlosnoe;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Usuarios {
+
     public String Nombre;
     public String Apellido;
     public Date Fecha;
@@ -59,6 +61,30 @@ public class Usuarios {
     public void setContrasenya(String Contrasenya) {
         this.Contrasenya = Contrasenya;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        SimpleDateFormat one = new SimpleDateFormat("dd/MM/yyyy");
+        Date Hoy=new Date();
+        int Year1=Fecha.getYear();
+        int Year2= Hoy.getYear();
+        
+        int Month1=Fecha.getMonth();
+        int Month2= Hoy.getMonth();
+         
+        int Day1=Fecha.getDay();
+        int Day2= Hoy.getDay();
+        
+        int NovoY=Year2-Year1;
+        int NovoM=Month2-Month1;
+        
+        int NovoDays= Day2-Day1;
+        
+        return "Nombre=" + Nombre + "\n"
+                + "Apellido=" + Apellido + "\n"
+                + "Tienen= "+NovoY+"Anios, "+NovoM+ "Meses,"+NovoDays +"Dias"+ "\n"
+                + "CorreoE=" + CorreoE + "\n"
+                + "Contrasenya=" + Contrasenya;
+    }
+
 }
