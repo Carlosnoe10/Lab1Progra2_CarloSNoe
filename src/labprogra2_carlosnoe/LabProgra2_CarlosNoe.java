@@ -7,6 +7,7 @@ package labprogra2_carlosnoe;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -74,12 +75,11 @@ public class LabProgra2_CarlosNoe {
                             Date c = new Date(AnioNac - 1900, MesNac - 1, DiaNac);
                             boolean zero = true;
                             boolean pam = true;
-                            
-                            
+
                             for (int j = 0; j < 1; j++) {
                                 System.out.println("Ingrese su Correo");
                                 Correo = sc.nextLine();
-                                boolean l= Correo( Correo);
+                                boolean l = Correo(Correo);
 //                                Valid = CorreosInvalidos(Correo);
 //                                Valid = VerificadorCorreos(Correo, UsU);
                                 for (int a = 0; a < Correo.length() - 1; a++) {
@@ -109,17 +109,22 @@ public class LabProgra2_CarlosNoe {
                                 } else {
                                     j++;
                                 }
+                                if (l = false) {
+                                    j--;
+                                } else {
+                                    j++;
+                                }
 
                             }
                             boolean Remid = true;
                             for (int j = 0; j < 1; j++) {
                                 System.out.println("Ingrese su Contrasenya");
                                 Contrasenya = sc.nextLine();
-                                if (Contrasenya.length()<8) {
-                                    Remid= false;
+                                if (Contrasenya.length() < 8) {
+                                    Remid = false;
                                 }
-                                Remid=Contra(Contrasenya);
-                                
+                                Remid = Contra(Contrasenya);
+
                                 if (Remid = true) {
                                     j++;
                                 } else {
@@ -138,6 +143,17 @@ public class LabProgra2_CarlosNoe {
                         }
                         break;
                     case 3:
+                        for (int i = 0; i < UsU.size(); i++) {
+                            String One = UsU.get(i).getCorreoE();
+                            StringTokenizer tokens = new StringTokenizer(One, "@");
+                            tokens.nextElement();
+                            String pop = (tokens.nextElement()).toString();
+
+                            if ((pop.equals("Gmail.com"))||(pop.equals("outlook.com"))||(pop.equals("yahoo.com"))||(pop.equals("icloud.com"))||(pop.equals("ProtonMail.com"))||(pop.equals("FastMail.com"))) {
+                                
+                            }
+                            
+                        }
 
                         break;
                     case 4:
@@ -151,17 +167,16 @@ public class LabProgra2_CarlosNoe {
         }
 
     }
-    
-    public static boolean Correo(String Correo){
-        String regex= "^[a-zA-Z0-9._%&$+-]+ @[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-        Pattern pattern= Pattern.compile(regex);
-        System.out.println(regex);
-        Matcher matcher= pattern.matcher(Correo);
-        System.out.println(matcher);
+
+    public static boolean Correo(String Correo) {
+        String regex = "^[a-zA-Z0-9._%&$+-]+ @[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(Correo);
         return matcher.matches();
-        
+
     }
-    public static boolean Contra(String contra){
+
+    public static boolean Contra(String contra) {
         String regex = "^[a-zA-Z0-9._%&$+-?<>!]{8,}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(contra);
